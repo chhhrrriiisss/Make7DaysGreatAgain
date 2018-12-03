@@ -1,0 +1,26 @@
+<configs>
+	<remove xpath="/buffs/buff[@name='buffEncumberedInv']" />
+	<remove xpath="/buffs/buff[@name='buffEncumberedWield']" />
+	<remove xpath="/buffs/buff[@name='buffNearDeathTrauma']" />
+	<remove xpath="/buffs/buff[@name='buffNearDeathTraumaTrigger']" />
+	<remove xpath="/buffs/buff[@name='buffNearDeathTraumaCalculate']" />
+
+	<!-- Add custom carry capacity buff (to remove icons) -->
+	<append xpath="/buffs">
+
+		<buff name="Unencumbered" name_key="Unencumbered" description_key="Some weight off your shoulders." icon="ui_game_symbol_agility" icon_color="255,255,255">
+			<stack_type value="ignore"/>
+			<effect_group>
+				<passive_effect name="CarryCapacity" operation="base_set" value="45" />			
+			</effect_group>
+		</buff>
+
+	</append>
+
+	<!-- Trigger this buff in player start effects -->
+	<append xpath="/buffs/buff[@name='buffStatusCheck']/effect_group">
+		<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="self" buff="Unencumbered"></triggered_effect>
+	</append>
+
+
+</configs>
